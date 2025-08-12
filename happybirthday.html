@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chúc Mừng Sinh Nhật Kim Thoại</title>
+  <link rel="icon" href="./image/birthday-cake.png">
+  <link rel="stylesheet" href="./css/style.css">
+  <style>
+    #countdown {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      display: inline-block;
+      transform: translate(-50%, -50%);
+      transition: 1s;
+      font-size: 0vw;
+      opacity: 100%;
+      -webkit-text-stroke: 3px #fc0093;
+      color: #0000;
+      filter: drop-shadow(0 0 3px #f903afb3) drop-shadow(0 0 15px #f903c4);
+      letter-spacing: -.02em;
+      margin: 0;
+      padding: 20px 0;  
+      z-index: 20;              
+    }
+    @-webkit-keyframes blinker {
+      from { opacity: 0.0; }
+      to { opacity: 1.0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="background-gradien"></div>
+    <div class="background-gradien"></div>
+    <div class="background-gradien"></div>
+    <div class="background-gradien"></div>
+    <div class="background-gradien"></div>
+    <div class="background-blur"></div>
+    <div class="background-icons" id="bg-icons"></div>
+  </div>
+  <div class="center fixed">
+    <a href="forkimthoai.html" id="continue" class="glow-on-hover" type="button">Tiếp tục &rarr;</a>
+  </div>
+  <!-- Thẻ audio ẩn -->
+  <audio src="./countdown.mp3" style="display: none;"></audio>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+
+    // Background icons
+    const icons = ['🎂','🎀','🍬','❤️','🌸','🕯️','💝','🍭','🎈','💐','🎊','🌟'];
+    const icons2 = ['🍭','💐','🎊','🌟','🎂','🎀','🍬','🎈',,'❤️','🌸','🕯️','💝',];
+    const bg = document.getElementById('bg-icons');
+
+    for (let i = 0; i < 60; i++) {
+      const icon = document.createElement('div');
+      icon.classList.add('icon');
+      icon.textContent = icons[Math.floor(Math.random() * icons.length)];
+      icon.style.left = `${Math.random() * 100}vw`;
+      icon.style.top = `${Math.random() * 100}vh`;
+      icon.style.fontSize = `${20 + Math.random() * 60}px`;
+      icon.style.animationDuration = `${10 + Math.random() * 20}s`;
+      bg.appendChild(icon);
+    }
+    $(document).ready(function () {
+      let counter = 3;
+      let timer = setInterval( function() {
+        $('#countdown').remove();     
+        let countdown = $('<span id="countdown">'+(counter==0? 'Bắt đầu':counter)+'</span>'); 
+        
+        countdown.appendTo($('.container'));
+        setTimeout( () => {
+          if (counter >-1) {
+          $('#countdown').css({ 'font-size': '20vw', 'opacity': 30 }); 
+          } else {
+            $('#countdown').css({ 'font-size': '5vw', 'opacity': 80 });
+          }
+        },20);
+        counter--;
+        if (counter == -2) {
+          clearInterval(timer);
+          $('#countdown').remove();     
+          $('#continue').css({ 'opacity': '1', 'transform': 'translateY(0)' })
+        };
+      }, 1000);
+    });
+  </script>
+</body>
+</html>

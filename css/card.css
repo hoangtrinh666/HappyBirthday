@@ -1,0 +1,204 @@
+.container-card {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    transform-style: preserve-3d;
+    margin-top: 5%;
+}
+
+.box-card {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 1s ease;
+    cursor: pointer;
+
+}
+
+.box-card1 {
+    animation: rotate3d1 12s infinite linear;
+}
+
+.box-card2 {
+    animation: rotate3d2 12s infinite linear;
+}
+
+.face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    backface-visibility: visible;
+    border-radius: 12px;
+    background: linear-gradient(145deg, #2a2a2a, #383838);
+    border: 2px solid #646cff;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.face::before {
+    content: '';
+    position: absolute;
+    width:  100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+    top: -100%;
+    left: -100%;
+    transition: all 0.5s ease;
+    transform: translateZ(20px), skew(-0.06turn, 18deg);
+    animation: effect 4s infinite linear;
+}
+
+.face::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.05) 50%,
+        transparent 100%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    animation: opa 4s infinite linear;
+}
+
+.face img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+}
+
+@keyframes effect {
+    0% {
+        top: -100%;
+        left: -100%;
+    }
+    25% {
+        top: -50%;
+        left: -50%;
+    }
+    50% {
+        top: 0%;
+        left: 0%;
+    }
+    75% {
+        top: 50%;
+        left: 50%;
+    }
+    100% {
+        top: 100%;
+        left: 100%;
+    }
+}
+
+@keyframes opa {
+    0% {
+        opacity: 0;
+    }
+    25% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    75% {
+        opacity: 0.8;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.front {
+    transform: translateZ(100px);
+    border-color: #646cff;
+}
+
+.back {
+    transform: translateZ(-100px) rotateY(180deg);
+    border-color: #00bcd4;
+}
+
+.right {
+    transform: translateX(100px) rotateY(90deg);
+    border-color: #4caf50;
+}
+
+.left {
+    transform: translateX(-100px) rotateY(-90deg);
+    border-color: #ff4081;
+}
+
+.top {
+    transform: translateY(-100px) rotateX(90deg);
+    border-color: #ffc107;
+}
+
+.bottom {
+    transform: translateY(100px) rotateX(-90deg);
+    border-color: #9c27b0;
+}
+
+@keyframes rotate3d1 {
+    0% {
+        transform: rotateX(0) rotateY(0) translateY(100%) translateX(-100%);
+    }
+    25% {
+        transform: rotateX(90deg) rotateY(90deg) translateY(50%) translateX(-50%);
+    }
+    50% {
+        transform: rotateX(180deg) rotateY(180deg) translateY(0%) translateX(0%);
+    }
+    75% {
+        transform: rotateX(270deg) rotateY(270deg) translateY(50%) translateX(-50%);
+    }
+    100% {
+        transform: rotateX(360deg) rotateY(360deg) translateY(100%) translateX(-100%);
+    }
+}
+@keyframes rotate3d2 {
+    0% {
+        transform: rotateX(360deg) rotateY(360deg) translateY(-100%) translateX(100%);
+    }
+    25% {
+        transform: rotateX(270deg) rotateY(270deg) translateY(-50%) translateX(50%);
+    }
+    50% {
+        transform: rotateX(180deg) rotateY(180deg) translateY(0%) translateX(0%);
+    }
+    75% {
+        transform: rotateX(90deg) rotateY(90deg) translateY(-50%) translateX(50%);
+    }
+    100% {
+        transform: rotateX(0) rotateY(0) translateY(-100%) translateX(100%);
+    }
+}
+
+@media (max-width: 768px) {
+    .box-card {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .front { transform: translateZ(75px); }
+    .back { transform: translateZ(-75px) rotateY(180deg); }
+    .right { transform: translateX(75px) rotateY(90deg); }
+    .left { transform: translateX(-75px) rotateY(-90deg); }
+    .top { transform: translateY(-75px) rotateX(90deg); }
+    .bottom { transform: translateY(75px) rotateX(-90deg); }
+}
+
+@media screen and (max-width: 1024px) {
+  /* Styles to apply when the screen width is 1024px or less */
+  .container-card {
+    display: none;
+  }
+}
